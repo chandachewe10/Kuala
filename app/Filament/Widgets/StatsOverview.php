@@ -36,6 +36,7 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-m-calendar', IconPosition::Before)
                 ->color('primary')
                 ,
+               
             Stat::make('Denied Claims', Claim::query()
                 ->when($startDate, fn(Builder $query) => $query->whereDate('created_at', '>=', $startDate))
                 ->when($endDate, fn(Builder $query) => $query->whereDate('created_at', '<=', $endDate))
