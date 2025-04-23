@@ -84,8 +84,11 @@ class ClaimResource extends Resource
                     ->maxSize(5120)
                     ->columnSpan(2)
                     ->openable(),
-                Forms\Components\Textarea::make('ai_feedback')
-                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('ai_feedback.raw')
+                ->label('AI Feedback')
+                ->rows(6)  
+                ->columnSpanFull()
+                ->disabled()
             ]);
     }
 
@@ -105,21 +108,22 @@ class ClaimResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('incident_date')
-                    ->date()
+            //     Tables\Columns\TextColumn::make('incident_date')
+            //         ->date()
                    
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('incident_location')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('estimated_loss')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('police_report_number')
-                    ->searchable(),
-               Tables\Columns\BadgeColumn::make('ai_feedback.raw')
-                ->label('AI Feedback')
-                ->color(fn ($state) => str_contains(strtolower($state), 'missing') ? 'danger' : 'success')
-                ->tooltip(fn ($state) => $state),
+            //         ->sortable(),
+            //     Tables\Columns\TextColumn::make('incident_location')
+            //         ->searchable(),
+            //     Tables\Columns\TextColumn::make('estimated_loss')
+            //         ->numeric()
+            //         ->sortable(),
+            //     Tables\Columns\TextColumn::make('police_report_number')
+            //         ->searchable(),
+            //    Tables\Columns\BadgeColumn::make('ai_feedback.raw')
+            //     ->label('AI Feedback')
+            //     ->wrap()
+            //     ->color(fn ($state) => str_contains(strtolower($state), 'missing') ? 'danger' : 'success')
+            //     ->tooltip(fn ($state) => $state),
                   
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

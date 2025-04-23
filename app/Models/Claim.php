@@ -17,7 +17,7 @@ class Claim extends Model implements HasMedia
 public function runAiValidation()
 {
     $openAIconfigs = OpenAIConfig::latest()->first();
-    if(!is_null($openAIconfigs) &&  $openAIconfigs->status == 'ACTIVE'){
+    if(!is_null($openAIconfigs) && !is_null($openAIconfigs->token) &&  $openAIconfigs->status == 'ACTIVE'){
     $prompt = $openAIconfigs->prompt;
     $response = Http::withToken($openAIconfigs->token)->post($openAIconfigs->base_uri.$openAIconfigs->endpoint, [
         'model' => $openAIconfigs->name,
