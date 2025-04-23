@@ -37,8 +37,11 @@ class OpenaiConfigResource extends Resource
                 Forms\Components\TextInput::make('token')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('prompt')
-                    ->maxLength(255)
+                    Forms\Components\Textarea::make('prompt')
+                    ->required()
+                    ->rows(5)
+                    ->cols(10)
+                    ->columnSpanFull()
                     ->default(null),
                     Forms\Components\Select::make('status')
                     
@@ -64,11 +67,12 @@ class OpenaiConfigResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('endpoint')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('token')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('prompt')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status'),
+                // Tables\Columns\TextColumn::make('token')
+                //     ->searchable(),
+                    Tables\Columns\TextColumn::make('prompt')
+                   ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

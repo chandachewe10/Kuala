@@ -116,6 +116,10 @@ class ClaimResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('police_report_number')
                     ->searchable(),
+               Tables\Columns\BadgeColumn::make('ai_feedback.raw')
+                ->label('AI Feedback')
+                ->color(fn ($state) => str_contains(strtolower($state), 'missing') ? 'danger' : 'success')
+                ->tooltip(fn ($state) => $state),
                   
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

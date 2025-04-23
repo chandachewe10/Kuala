@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('estimated_loss', 12, 2)->nullable();
             $table->string('police_report_number')->nullable();
-            $table->json('witnesses')->nullable();
+            $table->string('witnesses')->nullable();
             $table->string('status')->default('pending');
             $table->json('ai_feedback')->nullable();
             $table->timestamps();

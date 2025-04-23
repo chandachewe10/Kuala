@@ -67,8 +67,7 @@ class ClaimResource extends Resource
                 Forms\Components\Textarea::make('witnesses')
                     ->columnSpanFull(),
                
-                Forms\Components\Textarea::make('ai_feedback')
-                    ->columnSpanFull(),
+
                     SpatieMediaLibraryFileUpload::make('attachment')
                     ->disk('claims')
                     ->visibility('public')

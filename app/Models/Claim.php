@@ -4,9 +4,41 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
+use App\Models\OpenAIConfig;
 
 class Claim extends Model
 {
+
+
+    
+
+
+public function runAiValidation()
+{
+    $openAIconfigs = OpenAIConfig::latest()->first();
+    $prompt = $openAIconfigs->prompt;
+    $response = Http::withToken($openAIconfigs->token)->post($openAIconfigs->base_uri.$openAIconfigs->endPoint, [
+        'model' => $openAIconfigs->name,
+        'messages' => [
+            ['role' => 'system', 'content' => 'You are an insurance claim validator.'],
+            ['role' => 'user', 'content' => $prompt],
+        ],
+        'temperature' => 0.4,
+    ]);
+
+    $aiOutput = $response->json('choices.0.message.content');
+
+    $this->ai_feedback = [
+        'raw' => $aiOutput,
+    ];
+    $this->save();
+}
+
+
+protected $casts = [
+    'ai_feedback' => 'array',
+];
+
     /**
      * The attributes that are mass assignable.
      *
