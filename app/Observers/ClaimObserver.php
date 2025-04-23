@@ -11,7 +11,7 @@ class ClaimObserver
      */
     public function created(Claim $claim): void
     {
-        //
+        $claim->runAiValidation(); 
     }
 
     /**
@@ -19,7 +19,7 @@ class ClaimObserver
      */
     public function updated(Claim $claim): void
     {
-        $claim->runAiValidation(); 
+       
     }
 
     /**
