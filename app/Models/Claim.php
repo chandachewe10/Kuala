@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Models;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
 use App\Models\OpenAIConfig;
 
-class Claim extends Model
+class Claim extends Model implements HasMedia
 {
 
-
+    use InteractsWithMedia;
     
 
 
