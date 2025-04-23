@@ -38,6 +38,15 @@ return [
             'report' => false,
         ],
 
+        'claims' => [
+            'driver' => 'local',
+            'root' => public_path('CLAIMSFOLDER'),
+            'throw' => false,
+            'url' => env('APP_URL').'/CLAIMSFOLDER',
+            'visibility' => 'public',
+        ],
+
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

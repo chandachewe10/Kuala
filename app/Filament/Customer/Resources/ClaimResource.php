@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Customer\Resources;
 
-use App\Filament\Resources\ClaimResource\Pages;
-use App\Filament\Resources\ClaimResource\RelationManagers;
+use App\Filament\Customer\Resources\ClaimResource\Pages;
+use App\Filament\Customer\Resources\ClaimResource\RelationManagers;
 use App\Models\Claim;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,13 +12,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class ClaimResource extends Resource
 {
     protected static ?string $model = Claim::class;
-    protected static ?string $navigationGroup = 'Insurance';
-    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -65,27 +64,12 @@ class ClaimResource extends Resource
                     ->default(null),
                 Forms\Components\Textarea::make('witnesses')
                     ->columnSpanFull(),
-                    Forms\Components\Select::make('status')
-                    
-                    ->label('Assign Status')
-                    ->options([
-                        'pending' => 'Pending',
-                        'approved' => 'Approved',
-                        'denied' => 'Denied',
-
-                    ])
-                    ->default('pending'),
-                    SpatieMediaLibraryFileUpload::make('attachment')
-                    ->disk('borrowers')
-                    ->visibility('public')
-                    ->multiple()
-                    ->minFiles(0)
-                    ->maxFiles(10)
-                    ->maxSize(5120)
-                    ->columnSpan(2)
-                    ->openable(),
+               
                 Forms\Components\Textarea::make('ai_feedback')
                     ->columnSpanFull(),
+                Forms\Components\TextInput::make('attachment')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -96,18 +80,15 @@ class ClaimResource extends Resource
                 Tables\Columns\TextColumn::make('full_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                
-                 ->searchable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
-               
-                ->searchable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('policy_number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('incident_date')
                     ->date()
-                   
                     ->sortable(),
                 Tables\Columns\TextColumn::make('incident_location')
                     ->searchable(),
@@ -116,7 +97,8 @@ class ClaimResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('police_report_number')
                     ->searchable(),
-                  
+                Tables\Columns\TextColumn::make('status')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -125,6 +107,8 @@ class ClaimResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('attachment')
+                    ->searchable(),
             ])
             ->filters([
                 //
