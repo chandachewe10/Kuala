@@ -9,4 +9,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateClaim extends CreateRecord
 {
     protected static string $resource = ClaimResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+       
+        return $this->getResource()::getUrl('index');
+    }
 }
