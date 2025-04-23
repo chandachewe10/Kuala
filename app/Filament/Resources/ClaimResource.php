@@ -76,7 +76,7 @@ class ClaimResource extends Resource
                     ])
                     ->default('pending'),
                     SpatieMediaLibraryFileUpload::make('attachment')
-                    ->disk('borrowers')
+                    ->disk('claims')
                     ->visibility('public')
                     ->multiple()
                     ->minFiles(0)

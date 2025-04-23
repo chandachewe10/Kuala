@@ -12,12 +12,14 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class ClaimResource extends Resource
 {
     protected static ?string $model = Claim::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'My Insurance claims';
 
     public static function form(Form $form): Form
     {
@@ -67,9 +69,15 @@ class ClaimResource extends Resource
                
                 Forms\Components\Textarea::make('ai_feedback')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('attachment')
-                    ->required()
-                    ->maxLength(255),
+                    SpatieMediaLibraryFileUpload::make('attachment')
+                    ->disk('claims')
+                    ->visibility('public')
+                    ->multiple()
+                    ->minFiles(0)
+                    ->maxFiles(10)
+                    ->maxSize(5120)
+                    ->columnSpan(2)
+                    ->openable(),
             ]);
     }
 
