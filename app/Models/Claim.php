@@ -19,7 +19,7 @@ public function runAiValidation()
     $openAIconfigs = OpenAIConfig::latest()->first();
     if(!is_null($openAIconfigs) &&  $openAIconfigs->status == 'ACTIVE'){
     $prompt = $openAIconfigs->prompt;
-    $response = Http::withToken($openAIconfigs->token)->post($openAIconfigs->base_uri.$openAIconfigs->endPoint, [
+    $response = Http::withToken($openAIconfigs->token)->post($openAIconfigs->base_uri.$openAIconfigs->endpoint, [
         'model' => $openAIconfigs->name,
         'messages' => [
             ['role' => 'system', 'content' => 'You are an insurance claim validator.'],
@@ -56,7 +56,7 @@ protected $casts = [
         'incident_date',
         'incident_location',
         'description',
-        'estimate_loss',
+        'estimated_loss',
         'police_report_number',
         'witnesses',
         'ai_feedback',
