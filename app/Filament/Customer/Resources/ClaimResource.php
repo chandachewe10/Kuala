@@ -28,10 +28,7 @@ class ClaimResource extends Resource
                 Forms\Components\TextInput::make('full_name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(255)
-                    ->default(null),
+               
                 Forms\Components\TextInput::make('phone')
                     ->tel()
                     ->regex('/^(\+260|0)?\d{9}$/')
@@ -83,6 +80,11 @@ class ClaimResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        ->modifyQueryUsing(function (Builder $query) { 
+           
+            return $query->where('email', auth()->user()->email); 
+        
+    }) 
             ->columns([
                 Tables\Columns\TextColumn::make('full_name')
                     ->searchable(),
@@ -105,6 +107,7 @@ class ClaimResource extends Resource
                 Tables\Columns\TextColumn::make('police_report_number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
+                ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

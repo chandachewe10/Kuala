@@ -104,7 +104,8 @@ class ClaimResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                
                 ->searchable(),
-                Tables\Columns\TextColumn::make('policy_number')
+                Tables\Columns\TextColumn::make('status')
+                ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),

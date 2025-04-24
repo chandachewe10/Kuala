@@ -22,8 +22,9 @@ public function runAiValidation()
     $response = Http::withToken($openAIconfigs->token)->post($openAIconfigs->base_uri.$openAIconfigs->endpoint, [
         'model' => $openAIconfigs->name,
         'messages' => [
-            ['role' => 'system', 'content' => 'You are an insurance claim validator.'],
-            ['role' => 'user', 'content' => $prompt],
+            ['role' => 'system', 'content' => $prompt],
+            ['role' => 'user', 'content' => $this->description],
+
         ],
         'temperature' => 0.4,
     ]);
@@ -59,9 +60,9 @@ protected $casts = [
         'estimated_loss',
         'police_report_number',
         'witnesses',
-        'ai_feedback',
         'userId',
         'attachment',
+        'status',
        
     ];
 }
