@@ -10,14 +10,14 @@
 
 
 ### Admin Panel: 
-[Website Link](https://kualatask.sentinel365.net/admin)
+[Admin Link](https://kualatask.sentinel365.net/admin)
 
 1. Email: admin@admin.com
 
 2. Password: test1234
 
 ### Customer Portal: 
-[Website Link](https://kualatask.sentinel365.net/customer)
+[Customer Link](https://kualatask.sentinel365.net/customer)
 
 1. Email: chewec03@gmail.com
 
@@ -39,6 +39,7 @@
 ```
 
 ## Create Admin & Test Locally
+```bash
 php artisan make:filament-user
 ```
 
