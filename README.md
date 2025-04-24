@@ -19,7 +19,7 @@
 ### Customer Portal: 
 [Website Link](https://kualatask.sentinel365.net/customer)
 
-1. Email: customer@example.com
+1. Email: chewec03@gmail.com
 
 2. Password: test1234
 
